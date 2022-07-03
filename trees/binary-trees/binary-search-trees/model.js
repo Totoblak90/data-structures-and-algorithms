@@ -38,7 +38,6 @@ class BinarySearchTree {
     }
     lookup(value) {
         if (!this.root) {
-            console.log(false)
             return false;
         }
         let currentNode = this.root;
@@ -51,7 +50,6 @@ class BinarySearchTree {
                 return currentNode;
             }
         }
-        console.log(null)
         return null
     }
 
