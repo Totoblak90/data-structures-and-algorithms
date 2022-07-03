@@ -31,14 +31,17 @@ class MyArray {
         for (let i = index; i < this.length - 1; i++) {
             this.data[i] = this.data[i + 1];
         }
-        console.log(this.data[this.length - 1]);
         delete this.data[this.length - 1];
         this.length--;
     }
 
     forEach() {
-        for (let i = 0; i < this.length; i++) {
-            console.log(this.data[i])
+        let counter = 0;
+        while (counter < this.length) {
+            console.log(
+                this.data[counter]
+            )
+            counter++
         }
     }
 }
@@ -49,4 +52,6 @@ myArray.push('!');
 myArray.push('you');
 myArray.push('are');
 myArray.push('nice');
-myArray.forEach();
+console.log(
+    myArray.forEach()
+)
