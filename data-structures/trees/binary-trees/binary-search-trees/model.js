@@ -52,7 +52,6 @@ class BinarySearchTree {
         }
         return null
     }
-
     remove(value) {
         if (!this.root) {
             return false;
@@ -132,6 +131,72 @@ class BinarySearchTree {
             }
         }
     }
+    breathFirstSearch = () => {
+        if (!this.root) {
+            return null;
+        }
+        let currentNode = this.root;
+        const queue = [];
+        const list = [];
+        queue.push(currentNode);
+        while (queue.length) {
+            currentNode = queue.shift();
+            list.push(currentNode.value);
+            if (currentNode.left) {
+                queue.push(currentNode.left)
+            }
+            if (currentNode.right) {
+                queue.push(currentNode.right);
+            }
+        }
+        return list;
+    }
+    BreadthFirstSearchRecursive(queue, list) {
+        if (!queue.length) {
+            return list;
+        }
+        const currentNode = queue.shift();
+        list.push(currentNode.value);
+
+        if (currentNode.left) {
+            queue.push(currentNode.left);
+        }
+        if (currentNode.right) {
+            queue.push(currentNode.right);
+        }
+
+        return this.BreadthFirstSearchRecursive(queue, list);
+    }
+    depthFirstSearchInOrder(node, list) {
+        if (node.left) {
+            this.depthFirstSearchInOrder(node.left, list)
+        }
+        list.push(node.value)
+        if (node.right) {
+            this.depthFirstSearchInOrder(node.right, list)
+        }
+        return list;
+    }
+    depthFirstSearchPreOrder(node, list) {
+        list.push(node.value)
+        if (node.left) {
+            this.depthFirstSearchPreOrder(node.left, list)
+        }
+        if (node.right) {
+            this.depthFirstSearchPreOrder(node.right, list)
+        }
+        return list;
+    }
+    depthFirstSearchPostOrder(node, list) {
+        if (node.left) {
+            this.depthFirstSearchPostOrder(node.left, list)
+        }
+        if (node.right) {
+            this.depthFirstSearchPostOrder(node.right, list)
+        }
+        list.push(node.value)
+        return list;
+    }
 }
 
 const tree = new BinarySearchTree();
@@ -144,9 +209,14 @@ tree.insert(15)
 tree.insert(1)
 tree.lookup(15);
 tree.lookup(7);
-console.log(
-    JSON.stringify(traverse(tree.root))
-)
+tree.BreadthFirstSearchRecursive([tree.root], []);
+tree.breathFirstSearch();
+console.log(tree.depthFirstSearchInOrder(tree.root, []))
+console.log(tree.depthFirstSearchPreOrder(tree.root, []))
+console.log(tree.depthFirstSearchPostOrder(tree.root, []))
+// console.log(
+//     JSON.stringify(traverse(tree.root))
+// )
 
 //     9
 //  4     20
